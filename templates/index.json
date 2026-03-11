@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "hero-slider",
+      "settings": {}
+    },
+      "header": {
+      "type": "header-navigation",
+      "settings": {}
+    }
+  },
+  "order": [
+    "header",
+    "main"
+  ]
+}

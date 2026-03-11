@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    {{ content_for_header }}
+    {{ 'reset.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>
