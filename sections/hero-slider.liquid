@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="{{'hero.css' |  asset_url}}">
+
+{% assign selected_shoes = section.settings.product_id %}
+<section class="hero">
+  <div class="hero__content">
+    <h2 class="hero__title">{{ selected_shoes.title }}</h2>
+    <p class="hero__description">{{ selected_shoes.description | strip_html }}</p>
+    <img
+      src="{{selected_shoes.featured_image |  image_url: width: 450}}"
+      alt=""
+      class="hero__product">
+      <a href="{{selected_shoes.url}}" class="hero__cta-button">Ver Mais</a>
+  </div>
+  <img
+    src="{{selected_shoes.metafields.custom.banner_de_produto |  image_url}}"
+    alt=""
+    class="hero__banner">
+</section>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product_id",
+        "label": "Produto"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero"
+      }
+    ]
+  }
+{% endschema %}
