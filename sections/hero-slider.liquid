@@ -1,21 +1,47 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
 <link rel="stylesheet" href="{{'hero.css' |  asset_url}}">
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+<script src="{{ 'slider.js' | asset_url}}" defer></script>
 
 {% assign selected_shoes = section.settings.product_id %}
-<section class="hero">
-  <div class="hero__content">
-    <h2 class="hero__title">{{ selected_shoes.title }}</h2>
-    <p class="hero__description">{{ selected_shoes.description | strip_html }}</p>
-    <img
-      src="{{selected_shoes.featured_image |  image_url: width: 450}}"
-      alt=""
-      class="hero__product">
-      <a href="{{selected_shoes.url}}" class="hero__cta-button">Ver Mais</a>
+{% assign used_colors = '' %}
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {% if selected_shoes != blank %}
+      {% for variant in selected_shoes.variants %}
+        {% unless used_colors contains variant.option1 %}
+          <div class="swiper-slide">
+            <section class="hero">
+              <div class="hero__content">
+                <h2 class="hero__title">{{ selected_shoes.title }} - {{ variant.option1 }}</h2>
+                <p class="hero__description">{{ selected_shoes.description | strip_html }}</p>
+
+                <img
+                  src="{{ variant.image | image_url: width: 450 }}"
+                  alt="{{ variant.title }}"
+                  class="hero__product"
+                >
+
+                <a href="{{ variant.url }}" class="hero__cta-button">Ver Mais</a>
+              </div>
+
+              <img
+                src="{{ selected_shoes.metafields.custom.banner_de_produto | image_url }}"
+                alt="Banner"
+                class="hero__banner"
+              >
+            </section>
+          </div>
+
+          {% assign used_colors = used_colors | append: variant.option1 | append: ',' %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
   </div>
-  <img
-    src="{{selected_shoes.metafields.custom.banner_de_produto |  image_url}}"
-    alt=""
-    class="hero__banner">
-</section>
+
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
 {% schema %}
   {
     "name": "Hero",
