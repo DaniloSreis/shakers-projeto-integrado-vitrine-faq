@@ -1,0 +1,50 @@
+.hero {
+  position: relative;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-inline: 5em;
+}
+
+.hero__content {
+  display: grid;
+  justify-content: start;
+  gap: 20px;
+}
+
+.hero__title {
+  font-size: 2.5rem;
+}
+
+.hero__description {
+  max-width: 45ch;
+  font-size: 1.125rem;
+}
+
+.hero__cta-button {
+  background: var(--button);
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  justify-self: start;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.hero__product {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero__banner {
+  object-fit: cover;
+  height: 100dvh;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50vw;
+  z-index: -1;
+}
