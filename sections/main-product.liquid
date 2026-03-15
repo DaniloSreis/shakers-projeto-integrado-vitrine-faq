@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="{{ 'main-product.css' | asset_url }}">
+{% assign product_selected = section.settings.product_Id %}
+{% assign sizes = product_selected.variants | map: 'option2' | uniq %}
+{% assign colors = '' %}
+
+<section class="product">
+  <div class="product__header">
+    <h2 class="product__title">{{ product_selected.title }}</h2>
+    <img src="{{ product_selected.featured_image | image_url: width: 400  }}" alt="">
+  </div>
+
+  <div class="product__details">
+    <span class="product__label">Tamanho</span>
+    <ul class="product__sizes">
+      {% for size in sizes %}
+        <li class="product__size">{{ size }}</li>
+      {% endfor %}
+    </ul>
+    <span class="product__label">Cores</span>
+
+    <ul class="product__colors">
+      {% for variant in product_selected.variants %}
+        {% unless colors contains variant.option1 %}
+          {% if variant.featured_image != blank %}
+            <li class="product__color">
+              <img
+                src="{{ variant.featured_image | image_url: width: 80 }}"
+                data-color="{{ variant.option1 | handleize }}"
+                alt="Sabrina 3 Flow {{ variant.option1 }}"
+              >
+            </li>
+          {% endif %}
+
+          {% assign colors = colors | append: variant.option1 | append: ',' %}
+        {% endunless %}
+      {% endfor %}
+    </ul>
+
+    <div class="product__footer">
+      <div aria-label="Quantidade" class="product__quantity">
+        <div class="product__quantity-controller">
+          <img src="{{ 'minius.svg' | asset_url}} " width="24" height="24" alt="">
+        </div>
+        <span class="product__quantity-value">1</span>
+        <div class="product__quantity-controller">
+          <img src="{{ 'plus.svg' | asset_url}} " width="24" height="24" alt="">
+        </div>
+      </div>
+    </div>
+    <button type="button" class="button button--buy">
+      Comprar <img src="{{ 'shopping-bag.svg' | asset_url}}" alt="">
+    </button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produto",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_Id",
+      "label": "Produto"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produto"
+    }
+  ]
+}
+{% endschema %}
