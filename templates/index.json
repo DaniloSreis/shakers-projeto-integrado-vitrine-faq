@@ -20,10 +20,18 @@
       "settings": {
         "product_id": "sabrina-3-flow"
       }
+    },
+    "collection_product_list_AbUKeQ": {
+      "type": "collection-product-list",
+      "name": "Lista de Produtos",
+      "settings": {
+        "collection_id": "sabrina-3"
+      }
     }
   },
   "order": [
     "header",
-    "main"
+    "main",
+    "collection_product_list_AbUKeQ"
   ]
 }
