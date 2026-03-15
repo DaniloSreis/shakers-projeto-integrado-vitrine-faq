@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="{{ 'collection.css' | asset_url }}">
+{% assign selected_collection = collections[section.settings.collection_id] %}
+
+<section class="products">
+  <h2 class="products__title">{{ selected_collection.title }}</h2>
+  <div class="products__list">
+    {% for product in selected_collection.products %}
+      <article class="products__card">
+        <img src="{{ product.featured_image | image_url}}" alt="" class="products__card-image">
+        <div class="products__card-footer">
+          <h3 class="products__card-title">{{ product.title }}</h3>
+          <span class="products__card-price">{{ product.price | money }}</span>
+          <button class="products__card-button">
+            <img src="{{ 'shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
+          </button>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Lista de Produtos",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_id",
+      "label": "Coleção"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lista de Produtos"
+    }
+  ]
+}
+{% endschema %}
