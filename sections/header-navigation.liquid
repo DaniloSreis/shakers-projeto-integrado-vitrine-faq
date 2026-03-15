@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{'header.css' | asset_url}}">
+{% assign page_handle = template.name | %}
 
-<header class="header">
+<header class="header--{{ page_handle }}">
   <h1 class="header__logo">{{ shop.name }}</h1>
   <nav class="header__nav">
     <ul class="header__list">

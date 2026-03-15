@@ -1,4 +1,4 @@
-.header {
+.header--index {
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em;
@@ -7,6 +7,12 @@
   left: 0;
   width: 100%;
   z-index: 10;
+}
+
+.header--product {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 1.5em;
 }
 
 .header__logo {
