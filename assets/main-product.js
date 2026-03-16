@@ -11,6 +11,16 @@ const plusBtn = document.querySelector('[data-action="plus"]');
 let variants = JSON.parse(details.dataset.variants);
 const options = { color: '', size: '' };
 let match;
+const buyButton = document.querySelector('.button--buy');
+
+buyButton.addEventListener('click', () => {
+  if (!match) return;
+
+  const quantityDisplay = document.querySelector('.product__quantity-value');
+  const currentQuantity = parseInt(quantityDisplay.textContent);
+
+  cart.addToCart(match.id, currentQuantity);
+});
 
 minusBtn.addEventListener('click', () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
