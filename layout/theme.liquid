@@ -6,9 +6,11 @@
     {{ content_for_header }}
     {{ 'reset.css' | asset_url | stylesheet_tag }}
     {{ 'global.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
     {{ content_for_layout }}
+    <script type="module" src="{{ 'cart-api.js' | asset_url }}" defer></script>
   </body>
 </html>
