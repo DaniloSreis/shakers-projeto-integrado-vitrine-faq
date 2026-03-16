@@ -6,6 +6,7 @@ const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
 const details = document.querySelector('.product__details');
 const productImage = document.querySelector('.product__image');
+const productPrice = document.querySelector('.product__price');
 
 let variants = JSON.parse(details.dataset.variants);
 const options = { color: '', size: '' };
@@ -20,7 +21,13 @@ function updateVariant(type, value) {
     );
   }
 
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   productImage.src = match.featured_image.src;
+  productPrice.innerText = formatter.format(match.price / 100);
 }
 
 colors.forEach((color) => {
