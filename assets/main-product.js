@@ -6,11 +6,31 @@ const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
 const details = document.querySelector('.product__details');
 const productImage = document.querySelector('.product__image');
-const productPrice = document.querySelector('.product__price');
-
+const minusBtn = document.querySelector('[data-action="minus"]');
+const plusBtn = document.querySelector('[data-action="plus"]');
 let variants = JSON.parse(details.dataset.variants);
 const options = { color: '', size: '' };
 let match;
+
+minusBtn.addEventListener('click', () => {
+  const quantityDisplay = document.querySelector('.product__quantity-value');
+
+  let currentQuantity = parseInt(quantityDisplay.textContent);
+
+  if (currentQuantity > 1) {
+    currentQuantity--;
+    quantityDisplay.textContent = currentQuantity;
+  }
+});
+
+plusBtn.addEventListener('click', () => {
+  const quantityDisplay = document.querySelector('.product__quantity-value');
+
+  let currentQuantity = parseInt(quantityDisplay.textContent);
+
+  currentQuantity++;
+  quantityDisplay.textContent = currentQuantity;
+});
 
 function updateVariant(type, value) {
   options[type] = value;

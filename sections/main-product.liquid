@@ -39,11 +39,11 @@
 
     <div class="product__footer">
       <div aria-label="Quantidade" class="product__quantity">
-        <div class="product__quantity-controller">
+        <div class="product__quantity-controller" data-action='minus'>
           <img src="{{ 'minius.svg' | asset_url}} " width="24" height="24" alt="">
         </div>
         <span class="product__quantity-value">1</span>
-        <div class="product__quantity-controller">
+        <div class="product__quantity-controller" data-action='plus'>
           <img src="{{ 'plus.svg' | asset_url}} " width="24" height="24" alt="">
         </div>
       </div>
