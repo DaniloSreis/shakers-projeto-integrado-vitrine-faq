@@ -40,6 +40,7 @@ export default class cart {
       },
     });
     const data = await response.json();
+    return data
   }
 
   async clearCart() {
