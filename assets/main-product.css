@@ -7,6 +7,10 @@
   padding: 1em 1.5em;
 }
 
+.product__price {
+  display: block;
+}
+
 .product__label {
   margin-block-end: 0.5em;
   text-transform: uppercase;

@@ -7,6 +7,7 @@
 <section class="product">
   <div class="product__header">
     <h2 class="product__title">{{ product_selected.title }}</h2>
+    <span class="product__price">{{ product_selected.price | money }}</span>
     <img src="{{ product_selected.featured_image | image_url }}" class="product__image" width="400" alt="">
   </div>
 
