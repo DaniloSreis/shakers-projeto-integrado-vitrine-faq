@@ -1,4 +1,4 @@
-class cart {
+export default class cart {
   constructor() {
     this.locale = window.Shopify.routes.root;
   }
@@ -40,7 +40,6 @@ class cart {
       },
     });
     const data = await response.json();
-    console.log(data);
   }
 
   async clearCart() {
