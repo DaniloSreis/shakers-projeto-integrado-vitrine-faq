@@ -10,10 +10,8 @@
           <a href="{{link.url}}" class="header__link">{{ link.title }}</a>
         </li>
       {% endfor %}
-      <li class="header__item header__cart">
-        <img src="{{ 'shopping-bag.svg' | asset_url }}" class="header__cart-image" alt="">
-      </li>
     </ul>
+    {% render 'cart-drawer' %}
   </nav>
 </header>
 

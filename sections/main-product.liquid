@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ 'main-product.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'cart.css' | asset_url }}">
 <script type="module" src="{{ 'main-product.js' | asset_url}}" defer></script>
 {% assign product_selected = section.settings.product_Id %}
 {% assign sizes = product_selected.variants | map: 'option2' | uniq %}
