@@ -14,6 +14,34 @@ const options = { color: '', size: '34' };
 let match;
 const buyButton = document.querySelector('.button--buy');
 
+function syncProductStateFromURL() {
+  const urlParam = new URLSearchParams(window.location.search);
+  const variantIdFromURL = urlParam.get('variant');
+
+  if (!variantIdFromURL) return;
+
+  const variantMatch = variants.find((v) => v.id == variantIdFromURL);
+
+  if (variantMatch) {
+    options.color = variantMatch.option1;
+    options.size = variantMatch.option2;
+
+    match = variantMatch;
+
+    renderProductUpdate(variantMatch);
+  }
+}
+
+function renderProductUpdate(variant) {
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
+  productImage.src = variant.featured_image.src;
+  productPrice.innerText = formatter.format(variant.price / 100);
+}
+
 buyButton.addEventListener('click', () => {
   if (!match) return;
 
@@ -72,3 +100,5 @@ sizes.forEach((size) => {
     updateVariant('size', event.currentTarget.textContent);
   });
 });
+
+syncProductStateFromURL();
