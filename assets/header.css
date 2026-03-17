@@ -33,3 +33,8 @@
   position: relative;
   padding-block: 0.5em;
 }
+
+.header__cart {
+  cursor: pointer;
+  padding-block: 0.5em;
+}
