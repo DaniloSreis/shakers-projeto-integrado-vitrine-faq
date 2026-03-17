@@ -1,10 +1,8 @@
 export default class Cart {
-  constructor() {
-    this.locale = window.Shopify.routes.root;
-  }
+  constructor() {}
 
   async addToCart(id, quantity) {
-    const response = await fetch(this.locale + 'cart/add.js', {
+    const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,20 +18,23 @@ export default class Cart {
 
   async updateQuantity(id, quantity) {
     const updates = { [id]: quantity };
-    const response = await fetch(this.locale + 'cart/update.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      window.Shopify.routes.root + 'cart/update.js',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ updates }),
       },
-      body: JSON.stringify({ updates }),
-    });
+    );
 
     const data = await response.json();
     return data;
   }
 
   async getCart() {
-    const response = await fetch(this.locale + 'cart.js', {
+    const response = await fetch(window.Shopify.routes.root + 'cart.js', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,11 +45,14 @@ export default class Cart {
   }
 
   async clearCart() {
-    const response = await fetch(this.locale + 'cart/clear.js', {
+    const response = await fetch(window.Shopify.routes.root + 'cart/clear.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
     });
+
+    const data = await response.json();
+    return data
   }
 }
