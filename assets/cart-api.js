@@ -1,4 +1,4 @@
-export default class cart {
+export default class Cart {
   constructor() {
     this.locale = window.Shopify.routes.root;
   }

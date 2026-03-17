@@ -1,6 +1,6 @@
 import CartApi from './cart-api.js';
 
-const cart = new CartApi();
+const cartApi = new CartApi();
 
 const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
@@ -59,7 +59,7 @@ buyButton.addEventListener('click', () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
   const currentQuantity = parseInt(quantityDisplay.textContent);
 
-  cart.addToCart(match.id, currentQuantity);
+  cartApi.addToCart(match.id, currentQuantity);
 });
 
 minusBtn.addEventListener('click', () => {
