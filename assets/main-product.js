@@ -8,6 +8,7 @@ const productImage = document.querySelector('.product__image');
 const productPrice = document.querySelector('.product__price');
 const minusBtn = document.querySelector('[data-action="minus"]');
 const plusBtn = document.querySelector('[data-action="plus"]');
+const clearBtn = document.querySelector('.header__button-clear')
 let variants = JSON.parse(details.dataset.variants);
 const firstVariant = variants[0];
 let match = firstVariant;
@@ -17,6 +18,8 @@ const cartBtn = document.querySelector('.header__cart-trigger');
 const cartDrawer = document.querySelector('.header__cart-drawer');
 const cartClose = document.querySelector('.header__cart-close');
 const cartContent = document.querySelector('.header__cart-content');
+
+clearBtn.addEventListener("click", cartApi.clearCart)
 
 cartBtn.addEventListener('click', () => {
   cartDrawer.classList.toggle('is-open');

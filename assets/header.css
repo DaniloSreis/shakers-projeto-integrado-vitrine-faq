@@ -75,3 +75,15 @@
 .product-cart__image {
   max-width: 100px;
 }
+
+.hearder__button-clear {
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
