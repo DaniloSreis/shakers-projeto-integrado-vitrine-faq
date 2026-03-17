@@ -11,22 +11,7 @@
         </li>
       {% endfor %}
     </ul>
-
-    <div class="header__cart-container">
-      <button type="button" class="header__cart-trigger">
-        <img
-          src="{{ 'shopping-bag.svg' | asset_url }}"
-
-          class="header__cart-icon"
-          alt="Carrinho"
-        >
-      </button>
-
-      <div class="header__cart-drawer">
-        <img src="{{ 'shopping-bag.svg' | asset_url }}" class="header__cart-close" alt="">
-        <div class="header__cart-content"></div>
-      </div>
-    </div>
+    {% render 'cart-drawer' %}
   </nav>
 </header>
 

@@ -40,7 +40,25 @@ export default class Cart {
       },
     });
     const data = await response.json();
-    return data
+    return data;
+  }
+
+  async updateSection() {
+    const sectionId = 'header-navigation';
+
+    const response = await fetch(`${this.locale}?sections=${sectionId}`);
+    const data = await response.json();
+
+    const htmlString = data[sectionId];
+    const parser = new DOMParser();
+    const htmlDoc = parser.parseFromString(htmlString, 'text/html');
+
+    const newContent = htmlDoc.querySelector('.header__cart-content');
+    const oldContent = document.querySelector('.header__cart-content');
+
+    if (newContent && oldContent) {
+      oldContent.innerHTML = newContent.innerHTML;
+    }
   }
 
   async clearCart() {

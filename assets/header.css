@@ -71,3 +71,7 @@
   padding-block: 0.5em;
   justify-self: end;
 }
+
+.product-cart__image {
+  max-width: 100px;
+}

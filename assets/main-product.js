@@ -16,13 +16,14 @@ const buyButton = document.querySelector('.button--buy');
 const cartBtn = document.querySelector('.header__cart-trigger');
 const cartDrawer = document.querySelector('.header__cart-drawer');
 const cartClose = document.querySelector('.header__cart-close');
+const cartContent = document.querySelector('.header__cart-content');
 
-cartBtn.addEventListener("click", () => {
-  cartDrawer.classList.toggle("is-open");
+cartBtn.addEventListener('click', () => {
+  cartDrawer.classList.toggle('is-open');
 });
 
-cartClose.addEventListener("click", () => {
-  cartDrawer.classList.remove("is-open");
+cartClose.addEventListener('click', () => {
+  cartDrawer.classList.remove('is-open');
 });
 
 function syncProductStateFromURL() {
@@ -53,13 +54,43 @@ function renderProductUpdate(variant) {
   productPrice.innerText = formatter.format(variant.price / 100);
 }
 
-buyButton.addEventListener('click', () => {
+async function renderProductCart() {
+  const cart = await cartApi.getCart();
+
+  if (!cart || !cart.items) return;
+
+  cartContent.innerHTML = '';
+
+  cart.items.forEach((item) => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-cart');
+
+    productCard.innerHTML = `
+      <img class="product-cart__image" src="${item.image}" alt="${item.product_title}">
+      <div class="product-cart__details">
+        <h3 class="product-cart__title">${item.product_title}</h3>
+        <span class="product-cart__color">${item.variant_options[0] || ''}</span>
+        <span class="product-cart__size">${item.variant_options[1] || ''}</span>
+        <span class="product-cart__price">${(item.price / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </div>
+      <span class="product-cart__quantity">Qtd: ${item.quantity}</span>
+    `;
+
+    cartContent.appendChild(productCard);
+  });
+}
+
+buyButton.addEventListener('click', async () => {
   if (!match) return;
 
   const quantityDisplay = document.querySelector('.product__quantity-value');
   const currentQuantity = parseInt(quantityDisplay.textContent);
 
   cartApi.addToCart(match.id, currentQuantity);
+
+  await renderProductCart();
+
+  cartDrawer.classList.add('is-open');
 });
 
 minusBtn.addEventListener('click', () => {
@@ -112,4 +143,7 @@ sizes.forEach((size) => {
   });
 });
 
-syncProductStateFromURL();
+document.addEventListener('DOMContentLoaded', () => {
+  renderProductCart();
+  syncProductStateFromURL();
+});
