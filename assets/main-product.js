@@ -6,6 +6,7 @@ const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
 const details = document.querySelector('.product__details');
 const productImage = document.querySelector('.product__image');
+const productPrice = document.querySelector('.product__price');
 const minusBtn = document.querySelector('[data-action="minus"]');
 const plusBtn = document.querySelector('[data-action="plus"]');
 let variants = JSON.parse(details.dataset.variants);
