@@ -1,8 +1,10 @@
 .header--index {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -10,12 +12,15 @@
 }
 
 .header--product {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em;
 }
 
 .header__logo {
+  color: #fff;
   font-size: 3rem;
 }
 
@@ -29,7 +34,13 @@
 }
 
 .header__link {
-  color: var(--text);
+  color: #fff;
   position: relative;
+  padding-block: 0.5em;
+  font-size: 1.125rem;
+}
+
+.header__cart {
+  cursor: pointer;
   padding-block: 0.5em;
 }

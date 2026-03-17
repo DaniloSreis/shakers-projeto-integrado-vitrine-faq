@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{'header.css' | asset_url}}">
-{% assign page_handle = template.name | %}
+{% assign page_handle = template.name %}
 
 <header class="header--{{ page_handle }}">
   <h1 class="header__logo">{{ shop.name }}</h1>
@@ -10,24 +10,27 @@
           <a href="{{link.url}}" class="header__link">{{ link.title }}</a>
         </li>
       {% endfor %}
+      <li class="header__item header__cart">
+        <img src="{{ 'shopping-bag.svg' | asset_url }}" class="header__cart-image" alt="">
+      </li>
     </ul>
   </nav>
 </header>
 
 {% schema %}
-  {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "link_list",
-        "id": "menu_id",
-        "label": "Menu Principal"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Header"
-      }
-    ]
-  }
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu_id",
+      "label": "Menu Principal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
 {% endschema %}
