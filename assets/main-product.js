@@ -9,8 +9,9 @@ const productPrice = document.querySelector('.product__price');
 const minusBtn = document.querySelector('[data-action="minus"]');
 const plusBtn = document.querySelector('[data-action="plus"]');
 let variants = JSON.parse(details.dataset.variants);
-const options = { color: '', size: '34' };
-let match;
+const firstVariant = variants[0];
+let match = firstVariant;
+const options = { color: firstVariant.option1, size: firstVariant.option2 };
 const buyButton = document.querySelector('.button--buy');
 const cartBtn = document.querySelector('.header__cart-trigger');
 const cartDrawer = document.querySelector('.header__cart-drawer');
@@ -147,7 +148,6 @@ sizes.forEach((size) => {
     updateVariant('size', event.currentTarget.textContent);
   });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   renderProductCart();
