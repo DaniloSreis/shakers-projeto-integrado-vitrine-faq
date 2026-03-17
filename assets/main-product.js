@@ -1,7 +1,6 @@
 import CartApi from './cart-api.js';
 
 const cartApi = new CartApi();
-
 const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
 const details = document.querySelector('.product__details');
@@ -117,18 +116,24 @@ function updateVariant(type, value) {
   options[type] = value;
 
   if (options.color && options.size) {
-    match = variants.find(
+    const foundVariant = variants.find(
       (v) => v.option1 === options.color && v.option2 === options.size,
     );
+
+    if (foundVariant) {
+      match = foundVariant;
+
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+
+      productImage.src = match.featured_image.src;
+      productPrice.innerText = formatter.format(match.price / 100);
+      return;
+    }
+    match = null;
   }
-
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
-
-  productImage.src = match.featured_image.src;
-  productPrice.innerText = formatter.format(match.price / 100);
 }
 
 colors.forEach((color) => {
@@ -142,6 +147,7 @@ sizes.forEach((size) => {
     updateVariant('size', event.currentTarget.textContent);
   });
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   renderProductCart();
