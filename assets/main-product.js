@@ -9,7 +9,7 @@ const productImage = document.querySelector('.product__image');
 const minusBtn = document.querySelector('[data-action="minus"]');
 const plusBtn = document.querySelector('[data-action="plus"]');
 let variants = JSON.parse(details.dataset.variants);
-const options = { color: '', size: '' };
+const options = { color: '', size: '34' };
 let match;
 const buyButton = document.querySelector('.button--buy');
 
