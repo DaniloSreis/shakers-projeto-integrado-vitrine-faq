@@ -25,7 +25,9 @@
 }
 
 .header__nav {
-  align-content: center;
+  display: flex;
+  gap: 50px;
+  align-items: center;
 }
 
 .header__list {
@@ -40,7 +42,32 @@
   font-size: 1.125rem;
 }
 
-.header__cart {
+.header__cart-trigger {
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 0;
+}
+
+.header__cart-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 25dvw;
+  height: 100dvh;
+  background: #ffffff;
+  z-index: 1000;
+  padding: 1em;
+}
+
+.header__cart-drawer.is-open {
+  display: grid;
+}
+
+.header__cart-close {
+  cursor: pointer;
+  filter: invert(1);
   padding-block: 0.5em;
+  justify-self: end;
 }

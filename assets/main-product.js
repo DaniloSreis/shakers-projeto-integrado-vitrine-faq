@@ -13,6 +13,17 @@ let variants = JSON.parse(details.dataset.variants);
 const options = { color: '', size: '34' };
 let match;
 const buyButton = document.querySelector('.button--buy');
+const cartBtn = document.querySelector('.header__cart-trigger');
+const cartDrawer = document.querySelector('.header__cart-drawer');
+const cartClose = document.querySelector('.header__cart-close');
+
+cartBtn.addEventListener("click", () => {
+  cartDrawer.classList.toggle("is-open");
+});
+
+cartClose.addEventListener("click", () => {
+  cartDrawer.classList.remove("is-open");
+});
 
 function syncProductStateFromURL() {
   const urlParam = new URLSearchParams(window.location.search);
