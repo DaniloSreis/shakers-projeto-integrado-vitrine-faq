@@ -86,7 +86,7 @@ buyButton.addEventListener('click', async () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
   const currentQuantity = parseInt(quantityDisplay.textContent);
 
-  cartApi.addToCart(match.id, currentQuantity);
+  await cartApi.addToCart(match.id, currentQuantity);
 
   await renderProductCart();
 
