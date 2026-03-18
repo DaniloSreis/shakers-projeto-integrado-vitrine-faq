@@ -40,23 +40,6 @@ function  setCartVisibility(isOpen) {
   cartDom.drawer.classList.toggle("is-open", isOpen)
 }
 
-const colors = document.querySelectorAll('.product__color');
-const sizes = document.querySelectorAll('.product__size');
-const details = document.querySelector('.product__details');
-const productImage = document.querySelector('.product__image');
-const productPrice = document.querySelector('.product__price');
-const minusBtn = document.querySelector('[data-action="minus"]');
-const plusBtn = document.querySelector('[data-action="plus"]');
-const clearBtn = document.querySelector('.header__button-clear')
-const firstVariant = variants[0];
-let match = firstVariant;
-const options = { color: firstVariant.option1, size: firstVariant.option2 };
-const buyButton = document.querySelector('.button--buy');
-const cartBtn = document.querySelector('.header__cart-trigger');
-const cartDrawer = document.querySelector('.header__cart-drawer');
-const cartClose = document.querySelector('.header__cart-close');
-const cartContent = document.querySelector('.header__cart-content');
-
 clearBtn.addEventListener("click", cartApi.clearCart)
 
 cartBtn.addEventListener('click', () => {
