@@ -107,6 +107,19 @@ const renderCartItems = async () => {
   `).join('\n');
 };
 
+function updateVariantState(type, value) {
+  state.options[type] = value;
+  
+  const matchedVariant = variants.find(v => 
+    v.option1 === state.options.color && 
+    v.option2 === state.options.size
+  );
+
+  state.match = matchedVariant || null;
+  
+  return matchedVariant;
+}
+
 minusBtn.addEventListener('click', () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
 
@@ -151,6 +164,11 @@ function updateVariant(type, value) {
   }
 }
 
+function handleVariantChange(type, value) {
+  const variant = updateVariantState(type, value);
+  renderProductUpdate(variant);
+}
+
 function initDefaultSelection() {
   colors.forEach((color) => {
     if (color.dataset.color === options.color) {
@@ -165,22 +183,11 @@ function initDefaultSelection() {
   });
 }
 
-function findAndUpdateVariant(type, value) {
-  state.options[type] = value;
-  
-  const found = variants.find(v => 
-    v.option1 === state.options.color && v.option2 === state.options.size
-  );
-
-  state.match = found;
-  updateProductInfos(found);
-}
-
 dom.colors.forEach(color => {
-  color.addEventListener('click', () => findAndUpdateVariant('color', color.dataset.color));
+  color.addEventListener('click', () => handleVariantChange('color', color.dataset.color));
 });
 dom.sizes.forEach(size => {
-  size.addEventListener('click', () => findAndUpdateVariant('size', size.textContent));
+  size.addEventListener('click', () => handleVariantChange('size', size.textContent));
 });
 
 cartDom.openBtn.addEventListener('click', () => {
