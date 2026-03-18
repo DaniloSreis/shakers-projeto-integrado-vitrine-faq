@@ -30,6 +30,12 @@
   padding: 1em;
 }
 
+.product__size.is-selected {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
 .product__colors {
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +45,19 @@
 }
 
 .product__color {
+  position: relative;
   cursor: pointer;
+}
+
+.product__color.is-selected::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: black;
+  font-size: 12px;
+  width: 100%;
+  height: 2px;
 }
 
 .product__footer {
