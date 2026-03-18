@@ -1,6 +1,42 @@
 import CartApi from './cart-api.js';
 
 const cartApi = new CartApi();
+
+const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL"
+})
+
+const dom = {
+  details: document.querySelector(".product__details"),
+  image: document.querySelector(".product__image"),
+  price: document.querySelector(".product__price"),
+  color: document.querySelector(".product__color"),
+  size: document.querySelector(".product__size"),
+  quantity: document.querySelector(".product__quantity-value"),
+  minusBtn: document.querySelector("[data-action='minus']"),
+  plusBtn: document.querySelector("[data-action='plus']"),
+  buyButton: document.querySelector(".button--buy"),
+}
+
+const cartDom = {
+  trigger: document.querySelector(".header__cart-trigger"),
+  drawer: document.querySelector(".header__cart-drawer"),
+  closeBtn: document.querySelector(".header__cart-close"),
+  content: document.querySelector(".header__cart-content"),
+  clearBtn: document.querySelector(".header__button-clear"),
+}
+
+let variants = JSON.parse(details.dataset.variants);
+const state = {
+  options: {
+    color: variants[0].option1,
+    size: variants[0].option2,
+  },
+  match: variants[0]
+}
+
+
 const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
 const details = document.querySelector('.product__details');
@@ -9,7 +45,6 @@ const productPrice = document.querySelector('.product__price');
 const minusBtn = document.querySelector('[data-action="minus"]');
 const plusBtn = document.querySelector('[data-action="plus"]');
 const clearBtn = document.querySelector('.header__button-clear')
-let variants = JSON.parse(details.dataset.variants);
 const firstVariant = variants[0];
 let match = firstVariant;
 const options = { color: firstVariant.option1, size: firstVariant.option2 };
