@@ -145,7 +145,6 @@ dom.buyButton.addEventListener('click', async () => {
   if (!state.match) return;
 
   const qty = parseInt(dom.quantity.textContent);
-  dom.buyButton.disabled = true;
 
   await cartApi.addToCart(state.match.id, qty);
   await renderCartItems();
