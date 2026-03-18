@@ -11,8 +11,8 @@ const dom = {
   details: document.querySelector(".product__details"),
   image: document.querySelector(".product__image"),
   price: document.querySelector(".product__price"),
-  colors: document.querySelector(".product__color"),
-  sizes: document.querySelector(".product__size"),
+  colors: document.querySelectorAll(".product__color"),
+  sizes: document.querySelectorAll(".product__size"),
   quantity: document.querySelector(".product__quantity-value"),
   minusBtn: document.querySelector("[data-action='minus']"),
   plusBtn: document.querySelector("[data-action='plus']"),
@@ -27,6 +27,7 @@ const cartDom = {
   clearBtn: document.querySelector(".header__button-clear"),
 }
 
+console.log(cartDom.clearBtn)
 let variants = JSON.parse(dom.details.dataset.variants);
 const state = {
   options: {
@@ -40,40 +41,9 @@ function  setCartVisibility(isOpen) {
   cartDom.drawer.classList.toggle("is-open", isOpen)
 }
 
-dom.clearBtn.addEventListener("click", async () => {
-  await cartApi.clearCart()
-  await renderCartItems()
-})
-
-cartBtn.addEventListener('click', () => {
-  cartDrawer.classList.toggle('is-open');
-});
-
-cartClose.addEventListener('click', () => {
-  cartDrawer.classList.remove('is-open');
-});
-
-function syncProductStateFromURL() {
-  const urlParam = new URLSearchParams(window.location.search);
-  const variantIdFromURL = urlParam.get('variant');
-
-  if (!variantIdFromURL) return;
-
-  const variantMatch = variants.find((v) => v.id == variantIdFromURL);
-
-  if (variantMatch) {
-    options.color = variantMatch.option1;
-    options.size = variantMatch.option2;
-
-    match = variantMatch;
-
-    renderProductUpdate(variantMatch);
-  }
-}
-
 function updateProductInfos(variant) {
   dom.image.src = variant.featured_image.src;
-  dom.price = currencyFormatter.format(variant.price / 100);
+  dom.price.innerText = currencyFormatter.format(variant.price / 100);
 
   dom.colors.forEach((color) =>
     color.classList.toggle(
@@ -120,96 +90,82 @@ function updateVariantState(type, value) {
   return matchedVariant;
 }
 
-minusBtn.addEventListener('click', () => {
-  const quantityDisplay = document.querySelector('.product__quantity-value');
-
-  let currentQuantity = parseInt(quantityDisplay.textContent);
-
-  if (currentQuantity > 1) {
-    currentQuantity--;
-    quantityDisplay.textContent = currentQuantity;
-  }
-});
-
-plusBtn.addEventListener('click', () => {
-  const quantityDisplay = document.querySelector('.product__quantity-value');
-
-  let currentQuantity = parseInt(quantityDisplay.textContent);
-
-  currentQuantity++;
-  quantityDisplay.textContent = currentQuantity;
-});
-
-function updateVariant(type, value) {
-  options[type] = value;
-
-  if (options.color && options.size) {
-    const foundVariant = variants.find(
-      (v) => v.option1 === options.color && v.option2 === options.size,
-    );
-
-    if (foundVariant) {
-      match = foundVariant;
-
-      const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      });
-
-      productImage.src = match.featured_image.src;
-      productPrice.innerText = formatter.format(match.price / 100);
-      return;
-    }
-    match = null;
-  }
-}
-
 function handleVariantChange(type, value) {
   const variant = updateVariantState(type, value);
   renderProductUpdate(variant);
 }
 
-function initDefaultSelection() {
-  colors.forEach((color) => {
-    if (color.dataset.color === options.color) {
-      color.classList.add('is-selected');
-    }
-  });
+function syncProductStateFromURL() {
+  const urlParam = new URLSearchParams(window.location.search);
+  const variantIdFromURL = urlParam.get('variant');
 
-  sizes.forEach((size) => {
-    if (size.textContent === options.size) {
-      size.classList.add('is-selected');
-    }
-  });
+  const variantMatch = variants.find((v) => v.id == variantIdFromURL);
+
+  options.color = variantMatch.option1;
+  options.size = variantMatch.option2;
+
+  match = variantMatch;
+
+  renderProductUpdate(variantMatch);
 }
+
+
+dom.clearBtn.addEventListener("click", async () => {
+  await cartApi.clearCart()
+  await renderCartItems()
+})
+
+cartBtn.addEventListener('click', () => {
+  cartDrawer.classList.toggle('is-open');
+});
+
+cartClose.addEventListener('click', () => {
+  cartDrawer.classList.remove('is-open');
+});
+
+dom.minusBtn.addEventListener('click', () => {
+  let current = parseInt(dom.quantity.textContent);
+  if (current > 1) dom.quantity.textContent = --current;
+});
+
+dom.plusBtn.addEventListener('click', () => {
+  let current = parseInt(dom.quantity.textContent);
+  dom.quantity.textContent = ++current;
+});
 
 dom.colors.forEach(color => {
   color.addEventListener('click', () => handleVariantChange('color', color.dataset.color));
 });
+
 dom.sizes.forEach(size => {
   size.addEventListener('click', () => handleVariantChange('size', size.textContent));
 });
 
-cartDom.openBtn.addEventListener('click', () => {
-  setCartVisibility(true);
-});
+cartDom.openBtn.addEventListener('click', () => setCartVisibility(true));
+cartDom.closeBtn.addEventListener('click', () => setCartVisibility(false));
 
-cartDom.closeBtn.addEventListener('click', () => {
-  setCartVisibility(false);
+cartDom.clearBtn.addEventListener("click", async () => {
+  await cartApi.clearCart();
+  await renderCartItems();
 });
 
 dom.buyButton.addEventListener('click', async () => {
-  const quantity = parseInt(dom.quantity.textContent);
+  if (!state.match) return;
+  
+  const qty = parseInt(dom.quantity.textContent);
+  dom.buyButton.disabled = true;
 
-  await cartApi.addToCart(match.id, quantity);
-
-  await renderCartItems();
-
-  setCartVisibility(true);
+  try {
+    await cartApi.addToCart(state.match.id, qty);
+    await renderCartItems();
+    setCartVisibility(true);
+  } finally {
+    dom.buyButton.disabled = false;
+  }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderCartItems
+  renderCartItems();
   syncProductStateFromURL();
-  initDefaultSelection();
+  updateProductInfos(state.match);
 });
