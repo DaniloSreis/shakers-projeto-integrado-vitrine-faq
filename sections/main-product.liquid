@@ -8,7 +8,7 @@
   <div class="product__header">
     <h2 class="product__title">{{ product_selected.title }}</h2>
     <span class="product__price">{{ product_selected.price | money }}</span>
-    <img src="{{ product_selected.featured_image | image_url }}" class="product__image" width="400" alt="">
+    <img src="{{ product_selected.featured_image | image_url }}" class="product__image" width="400" height="400" alt="">
   </div>
 
   <div class="product__details" data-variants="{{ product_selected.variants | json | escape}}">
@@ -26,8 +26,10 @@
           {% if variant.featured_image != blank %}
             <li class="product__color" data-color="{{ variant.option1 }}">
               <img
-                src="{{ variant.featured_image | image_url: width: 80 }}"
+                src="{{ variant.featured_image | image_url}}"
                 alt="Sabrina 3 Flow {{ variant.option1 }}"
+                width="80"
+                height="80"
               >
             </li>
           {% endif %}
@@ -49,7 +51,7 @@
       </div>
     </div>
     <button type="button" class="button button--buy">
-      Comprar <img src="{{ 'shopping-bag.svg' | asset_url}}" alt="">
+      Comprar <img src="{{ 'shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
     </button>
   </div>
 </section>
