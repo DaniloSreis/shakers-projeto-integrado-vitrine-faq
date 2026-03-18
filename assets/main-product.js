@@ -40,7 +40,10 @@ function  setCartVisibility(isOpen) {
   cartDom.drawer.classList.toggle("is-open", isOpen)
 }
 
-clearBtn.addEventListener("click", cartApi.clearCart)
+dom.clearBtn.addEventListener("click", async () => {
+  await cartApi.clearCart()
+  await renderCartItems()
+})
 
 cartBtn.addEventListener('click', () => {
   cartDrawer.classList.toggle('is-open');
@@ -87,31 +90,22 @@ function updateProductInfos(variant) {
   );
 }
 
-async function renderProductCart() {
+const renderCartItems = async () => {
   const cart = await cartApi.getCart();
-
-  if (!cart || !cart.items) return;
-
-  cartContent.innerHTML = '';
-
-  cart.items.forEach((item) => {
-    const productCard = document.createElement('div');
-    productCard.classList.add('product-cart');
-
-    productCard.innerHTML = `
+  
+  cartDom.content.innerHTML = cart.items.map(item => `
+    <div class="product-cart">
       <img class="product-cart__image" src="${item.image}" alt="${item.product_title}">
       <div class="product-cart__details">
         <h3 class="product-cart__title">${item.product_title}</h3>
         <span class="product-cart__color">${item.variant_options[0] || ''}</span>
         <span class="product-cart__size">${item.variant_options[1] || ''}</span>
-        <span class="product-cart__price">${(item.price / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span class="product-cart__price">${currencyFormatter.format(item.price / 100)}</span>
       </div>
       <span class="product-cart__quantity">Qtd: ${item.quantity}</span>
-    `;
-
-    cartContent.appendChild(productCard);
-  });
-}
+    </div>
+  `).join('\n');
+};
 
 minusBtn.addEventListener('click', () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
@@ -197,21 +191,18 @@ cartDom.closeBtn.addEventListener('click', () => {
   setCartVisibility(false);
 });
 
-buyButton.addEventListener('click', async () => {
-  if (!match) return;
+dom.buyButton.addEventListener('click', async () => {
+  const quantity = parseInt(dom.quantity.textContent);
 
-  const quantityDisplay = document.querySelector('.product__quantity-value');
-  const currentQuantity = parseInt(quantityDisplay.textContent);
+  await cartApi.addToCart(match.id, quantity);
 
-  await cartApi.addToCart(match.id, currentQuantity);
-
-  await renderProductCart();
+  await renderCartItems();
 
   setCartVisibility(true);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderProductCart();
+  renderCartItems
   syncProductStateFromURL();
   initDefaultSelection();
 });
