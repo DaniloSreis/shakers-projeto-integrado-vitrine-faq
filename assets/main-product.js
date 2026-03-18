@@ -17,7 +17,7 @@ const dom = {
   minusBtn: document.querySelector("[data-action='minus']"),
   plusBtn: document.querySelector("[data-action='plus']"),
   buyButton: document.querySelector(".button--buy"),
-}
+};
 
 const cartDom = {
   openBtn: document.querySelector(".header__cart-open"),
@@ -25,9 +25,8 @@ const cartDom = {
   closeBtn: document.querySelector(".header__cart-close"),
   content: document.querySelector(".header__cart-content"),
   clearBtn: document.querySelector(".header__button-clear"),
-}
+};
 
-console.log(cartDom.clearBtn)
 let variants = JSON.parse(dom.details.dataset.variants);
 const state = {
   options: {
@@ -35,10 +34,10 @@ const state = {
     size: variants[0].option2,
   },
   match: variants[0]
-}
+};
 
-function  setCartVisibility(isOpen) {
-  cartDom.drawer.classList.toggle("is-open", isOpen)
+function setCartVisibility(isOpen) {
+  cartDom.drawer.classList.toggle("is-open", isOpen);
 }
 
 function updateProductInfos(variant) {
@@ -46,23 +45,17 @@ function updateProductInfos(variant) {
   dom.price.innerText = currencyFormatter.format(variant.price / 100);
 
   dom.colors.forEach((color) =>
-    color.classList.toggle(
-      'is-selected',
-      color.dataset.color === state.options.color,
-    ),
+    color.classList.toggle('is-selected', color.dataset.color === state.options.color)
   );
 
   dom.sizes.forEach((size) =>
-    size.classList.toggle(
-      'is-selected',
-       size.textContent === state.options.size,
-    ),
+    size.classList.toggle('is-selected', size.textContent === state.options.size)
   );
 }
 
 const renderCartItems = async () => {
   const cart = await cartApi.getCart();
-  
+
   cartDom.content.innerHTML = cart.items.map(item => `
     <div class="product-cart">
       <img class="product-cart__image" src="${item.image}" alt="${item.product_title}">
@@ -85,14 +78,13 @@ function updateVariantState(type, value) {
     v.option2 === state.options.size
   );
 
-  state.match = matchedVariant || null;
-  
+  state.match = matchedVariant;
   return matchedVariant;
 }
 
 function handleVariantChange(type, value) {
   const variant = updateVariantState(type, value);
-  renderProductUpdate(variant);
+  updateProductInfos(variant);
 }
 
 function syncProductStateFromURL() {
@@ -101,27 +93,12 @@ function syncProductStateFromURL() {
 
   const variantMatch = variants.find((v) => v.id == variantIdFromURL);
 
-  options.color = variantMatch.option1;
-  options.size = variantMatch.option2;
-
-  match = variantMatch;
-
-  renderProductUpdate(variantMatch);
+  state.options.color = variantMatch.option1;
+  state.options.size = variantMatch.option2;
+  state.match = variantMatch;
+  updateProductInfos(variantMatch);
 }
 
-
-dom.clearBtn.addEventListener("click", async () => {
-  await cartApi.clearCart()
-  await renderCartItems()
-})
-
-cartBtn.addEventListener('click', () => {
-  cartDrawer.classList.toggle('is-open');
-});
-
-cartClose.addEventListener('click', () => {
-  cartDrawer.classList.remove('is-open');
-});
 
 dom.minusBtn.addEventListener('click', () => {
   let current = parseInt(dom.quantity.textContent);
@@ -145,8 +122,12 @@ cartDom.openBtn.addEventListener('click', () => setCartVisibility(true));
 cartDom.closeBtn.addEventListener('click', () => setCartVisibility(false));
 
 cartDom.clearBtn.addEventListener("click", async () => {
-  await cartApi.clearCart();
-  await renderCartItems();
+  try {
+    await cartApi.clearCart();
+    await renderCartItems();
+  } catch (error) {
+    console.error("Erro ao limpar:", error);
+  }
 });
 
 dom.buyButton.addEventListener('click', async () => {
