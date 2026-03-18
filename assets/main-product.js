@@ -20,14 +20,14 @@ const dom = {
 }
 
 const cartDom = {
-  trigger: document.querySelector(".header__cart-trigger"),
+  openBtn: document.querySelector(".header__cart-open"),
   drawer: document.querySelector(".header__cart-drawer"),
   closeBtn: document.querySelector(".header__cart-close"),
   content: document.querySelector(".header__cart-content"),
   clearBtn: document.querySelector(".header__button-clear"),
 }
 
-let variants = JSON.parse(details.dataset.variants);
+let variants = JSON.parse(dom.details.dataset.variants);
 const state = {
   options: {
     color: variants[0].option1,
@@ -36,6 +36,9 @@ const state = {
   match: variants[0]
 }
 
+function  setCartVisibility(isOpen) {
+  cartDom.drawer.classList.toggle("is-open", isOpen)
+}
 
 const colors = document.querySelectorAll('.product__color');
 const sizes = document.querySelectorAll('.product__size');
@@ -117,19 +120,6 @@ async function renderProductCart() {
     cartContent.appendChild(productCard);
   });
 }
-
-buyButton.addEventListener('click', async () => {
-  if (!match) return;
-
-  const quantityDisplay = document.querySelector('.product__quantity-value');
-  const currentQuantity = parseInt(quantityDisplay.textContent);
-
-  await cartApi.addToCart(match.id, currentQuantity);
-
-  await renderProductCart();
-
-  cartDrawer.classList.add('is-open');
-});
 
 minusBtn.addEventListener('click', () => {
   const quantityDisplay = document.querySelector('.product__quantity-value');
@@ -213,6 +203,27 @@ sizes.forEach((size) => {
   size.addEventListener('click', (event) => {
     updateVariant('size', event.currentTarget.textContent);
   });
+});
+
+cartDom.openBtn.addEventListener("click", () => {
+  setCartVisibility(true);
+});
+
+cartDom.closeBtn.addEventListener("click", () => {
+  setCartVisibility(false);
+});
+
+buyButton.addEventListener('click', async () => {
+  if (!match) return;
+
+  const quantityDisplay = document.querySelector('.product__quantity-value');
+  const currentQuantity = parseInt(quantityDisplay.textContent);
+
+  await cartApi.addToCart(match.id, currentQuantity);
+
+  await renderProductCart();
+
+  setCartVisibility(true);
 });
 
 document.addEventListener('DOMContentLoaded', () => {

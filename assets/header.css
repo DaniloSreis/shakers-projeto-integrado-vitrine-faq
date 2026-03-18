@@ -42,7 +42,7 @@
   font-size: 1.125rem;
 }
 
-.header__cart-trigger {
+.header__cart-open {
   background: none;
   border: none;
   cursor: pointer;
