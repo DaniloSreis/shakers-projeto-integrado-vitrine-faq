@@ -124,12 +124,8 @@ cartDom.openBtn.addEventListener('click', () => setCartVisibility(true));
 cartDom.closeBtn.addEventListener('click', () => setCartVisibility(false));
 
 cartDom.clearBtn.addEventListener("click", async () => {
-  try {
     await cartApi.clearCart();
     await renderCartItems();
-  } catch (error) {
-    console.error("Erro ao limpar:", error);
-  }
 });
 
 dom.buyButton.addEventListener('click', async () => {
@@ -138,13 +134,9 @@ dom.buyButton.addEventListener('click', async () => {
   const qty = parseInt(dom.quantity.textContent);
   dom.buyButton.disabled = true;
 
-  try {
     await cartApi.addToCart(state.match.id, qty);
     await renderCartItems();
     setCartVisibility(true);
-  } finally {
-    dom.buyButton.disabled = false;
-  }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
