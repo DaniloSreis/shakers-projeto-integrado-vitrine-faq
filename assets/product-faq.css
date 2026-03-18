@@ -1,0 +1,57 @@
+.product-faq {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 40px 20px;
+}
+
+.product-faq__title {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.product-faq__item {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.product-faq__item:last-child {
+  border-bottom: none;
+}
+
+.product-faq__button {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 20px 0;
+  text-align: start;
+  width: 100%;
+}
+
+.product-faq__answer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.3s ease-in-out,
+    opacity 0.3s ease;
+}
+
+.product-faq__answer {
+  color: #555;
+  margin: 0;
+}
+
+.product-faq__item.is-active .product-faq__answer {
+  max-height: 500px;
+  opacity: 1;
+  padding: 0.5em;
+}
+
+.product-faq__item.is-active .product-faq__button {
+  border-bottom: 1px solid #ddd;
+  color: #000;
+}
