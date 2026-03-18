@@ -2,17 +2,17 @@ import CartApi from './cart-api.js';
 
 const cartApi = new CartApi();
 
-const currencyFormatter = new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL"
-})
+const currencyFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
 
 const dom = {
   details: document.querySelector(".product__details"),
   image: document.querySelector(".product__image"),
   price: document.querySelector(".product__price"),
-  color: document.querySelector(".product__color"),
-  size: document.querySelector(".product__size"),
+  colors: document.querySelector(".product__color"),
+  sizes: document.querySelector(".product__size"),
   quantity: document.querySelector(".product__quantity-value"),
   minusBtn: document.querySelector("[data-action='minus']"),
   plusBtn: document.querySelector("[data-action='plus']"),
@@ -68,14 +68,23 @@ function syncProductStateFromURL() {
   }
 }
 
-function renderProductUpdate(variant) {
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+function updateProductInfos(variant) {
+  dom.image.src = variant.featured_image.src;
+  dom.price = currencyFormatter.format(variant.price / 100);
 
-  productImage.src = variant.featured_image.src;
-  productPrice.innerText = formatter.format(variant.price / 100);
+  dom.colors.forEach((color) =>
+    color.classList.toggle(
+      'is-selected',
+      color.dataset.color === state.options.color,
+    ),
+  );
+
+  dom.sizes.forEach((size) =>
+    size.classList.toggle(
+      'is-selected',
+       size.textContent === state.options.size,
+    ),
+  );
 }
 
 async function renderProductCart() {
@@ -188,11 +197,29 @@ sizes.forEach((size) => {
   });
 });
 
-cartDom.openBtn.addEventListener("click", () => {
+function findAndUpdateVariant(type, value) {
+  state.options[type] = value;
+  
+  const found = variants.find(v => 
+    v.option1 === state.options.color && v.option2 === state.options.size
+  );
+
+  state.match = found;
+  updateProductInfos(found);
+}
+
+dom.colors.forEach(color => {
+  color.addEventListener('click', () => findAndUpdateVariant('color', color.dataset.color));
+});
+dom.sizes.forEach(size => {
+  size.addEventListener('click', () => findAndUpdateVariant('size', size.textContent));
+});
+
+cartDom.openBtn.addEventListener('click', () => {
   setCartVisibility(true);
 });
 
-cartDom.closeBtn.addEventListener("click", () => {
+cartDom.closeBtn.addEventListener('click', () => {
   setCartVisibility(false);
 });
 
