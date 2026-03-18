@@ -171,32 +171,6 @@ function initDefaultSelection() {
   });
 }
 
-colors.forEach((color) => {
-  color.addEventListener('click', () => {
-    colors.forEach((c) => c.classList.remove('is-selected'));
-    color.classList.add('is-selected');
-  });
-});
-
-sizes.forEach((size) => {
-  size.addEventListener('click', () => {
-    sizes.forEach((c) => c.classList.remove('is-selected'));
-    size.classList.add('is-selected');
-  });
-});
-
-colors.forEach((color) => {
-  color.addEventListener('click', (event) => {
-    updateVariant('color', event.currentTarget.dataset.color);
-  });
-});
-
-sizes.forEach((size) => {
-  size.addEventListener('click', (event) => {
-    updateVariant('size', event.currentTarget.textContent);
-  });
-});
-
 function findAndUpdateVariant(type, value) {
   state.options[type] = value;
   
