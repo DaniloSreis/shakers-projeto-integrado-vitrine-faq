@@ -93,10 +93,12 @@ function syncProductStateFromURL() {
 
   const variantMatch = variants.find((v) => v.id == variantIdFromURL);
 
-  state.options.color = variantMatch.option1;
-  state.options.size = variantMatch.option2;
-  state.match = variantMatch;
-  updateProductInfos(variantMatch);
+  if (variantMatch) {
+    state.options.color = variantMatch.option1;
+    state.options.size = variantMatch.option2;
+    state.match = variantMatch;
+    updateProductInfos(variantMatch);
+  }
 }
 
 
