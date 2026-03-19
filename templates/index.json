@@ -13,11 +13,19 @@
       "type": "header-navigation",
       "name": "Header",
       "settings": {
-        "menu_id": ""
+        "menu_id": "main-menu"
+      }
+    },
+    "hero_slider_pHTBQd": {
+      "type": "hero-slider",
+      "name": "Hero",
+      "settings": {
+        "product_id": "sabrina-3-flow"
       }
     }
   },
   "order": [
-    "header_navigation_4ieAqT"
+    "header_navigation_4ieAqT",
+    "hero_slider_pHTBQd"
   ]
 }
