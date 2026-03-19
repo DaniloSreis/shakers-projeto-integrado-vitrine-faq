@@ -13,11 +13,27 @@
       "type": "header-navigation",
       "name": "Header",
       "settings": {
-        "menu_id": ""
+        "menu_id": "main-menu"
+      }
+    },
+    "main_product_AkfYCY": {
+      "type": "main-product",
+      "name": "Produto",
+      "settings": {
+        "product_Id": "sabrina-3-flow"
+      }
+    },
+    "product_faq_MRrWg8": {
+      "type": "product-faq",
+      "name": "FAQ do Produto",
+      "settings": {
+        "title": "Peguntas Frequentes"
       }
     }
   },
   "order": [
-    "header_navigation_zUDhTf"
+    "header_navigation_zUDhTf",
+    "main_product_AkfYCY",
+    "product_faq_MRrWg8"
   ]
 }
