@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+<link rel="stylesheet" href="{{'css-hero.css' |  asset_url}}">
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+<script src="{{ 'js-slider.js' | asset_url}}" defer></script>
+
+{% assign selected_shoes = section.settings.product_id %}
+{% assign used_colors = '' %}
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {% if selected_shoes != blank %}
+      {% for variant in selected_shoes.variants %}
+        {% unless used_colors contains variant.option1 %}
+          <div class="swiper-slide">
+            <section class="hero">
+              <div class="hero__content">
+                <h2 class="hero__title">{{ selected_shoes.title }} - {{ variant.option1 }}</h2>
+                <p class="hero__description">{{ selected_shoes.description | strip_html }}</p>
+
+                <img
+                  src="{{ variant.image | image_url}}"
+                  alt="{{ variant.title }}"
+                  class="hero__product"
+                  width="450"
+                  height="450"
+                >
+
+                <a href="{{ variant.url }}" class="hero__cta-button">Ver Mais</a>
+              </div>
+
+              <img
+                src="{{ selected_shoes.metafields.custom.banner_de_produto | image_url }}"
+                alt="Banner"
+                class="hero__banner"
+                width="auto"
+                height="auto"
+              >
+            </section>
+          </div>
+
+          {% assign used_colors = used_colors | append: variant.option1 | append: ',' %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_id",
+      "label": "Produto"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

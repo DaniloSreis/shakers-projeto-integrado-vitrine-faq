@@ -1,0 +1,17 @@
+.button {
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button--buy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #131313;
+  color: #fff;
+  padding: 1em 4em;
+  font-size: 1.125rem;
+}

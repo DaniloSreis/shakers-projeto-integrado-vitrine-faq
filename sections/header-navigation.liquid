@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="{{'css-header.css' | asset_url}}">
+{% assign page_handle = template.name %}
+
+<header class="header--{{ page_handle }}">
+  <h1 class="header__logo">{{ shop.name }}</h1>
+  <nav class="header__nav">
+    <ul class="header__list">
+      {% for link in section.settings.menu_id.links %}
+        <li class="header__item">
+          <a href="{{link.url}}" class="header__link">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% render 'cart-drawer' %}
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu_id",
+      "label": "Menu Principal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

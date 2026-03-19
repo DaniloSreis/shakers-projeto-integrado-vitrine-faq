@@ -1,18 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "main-product",
-      "settings": {}
-    },
-    "faq": {
-      "type": "product-faq",
+    "header_navigation_zUDhTf": {
+      "type": "header-navigation",
+      "name": "Header",
       "settings": {
-        "title": "Perguntas Frequentes"
+        "menu_id": "main-menu"
+      }
+    },
+    "main_product_QPgjNM": {
+      "type": "main-product",
+      "name": "Produto",
+      "settings": {
+        "product_Id": "sabrina-3-flow"
+      }
+    },
+    "product_faq_qGhiep": {
+      "type": "product-faq",
+      "name": "FAQ do Produto",
+      "settings": {
+        "title": "Peguntas Frequentes"
       }
     }
   },
   "order": [
-    "main",
-    "faq"
+    "header_navigation_zUDhTf",
+    "main_product_QPgjNM",
+    "product_faq_qGhiep"
   ]
 }

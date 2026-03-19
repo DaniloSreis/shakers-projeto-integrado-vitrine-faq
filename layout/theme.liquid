@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, intial-scale=1.0">
     {{ content_for_header }}
     {{ 'reset.css' | asset_url | stylesheet_tag }}
+    {{ 'css-global.css' | asset_url | stylesheet_tag }}
+    {{ 'css-components.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
     {{ content_for_layout }}
+    <script type="module" src="{{ 'js-cart-api.js' | asset_url }}" defer></script>
   </body>
 </html>

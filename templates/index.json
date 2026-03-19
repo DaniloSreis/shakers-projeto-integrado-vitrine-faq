@@ -1,16 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "hero-slider",
-      "settings": {}
-    },
-      "header": {
+    "header_navigation_yAUnhD": {
       "type": "header-navigation",
-      "settings": {}
+      "name": "Header",
+      "settings": {
+        "menu_id": "main-menu"
+      }
+    },
+    "hero_slider_AQqdVm": {
+      "type": "hero-slider",
+      "name": "Hero",
+      "settings": {
+        "product_id": "sabrina-3-flow"
+      }
+    },
+    "collection_product_list_AgyFFH": {
+      "type": "collection-product-list",
+      "name": "Lista de Produtos",
+      "settings": {
+        "collection_id": "sabrina-3"
+      }
     }
   },
   "order": [
-    "header",
-    "main"
+    "header_navigation_yAUnhD",
+    "hero_slider_AQqdVm",
+    "collection_product_list_AgyFFH"
   ]
 }
