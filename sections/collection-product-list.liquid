@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ 'collection.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'css-collection.css' | asset_url }}">
 {% assign selected_collection = collections[section.settings.collection_id] %}
 
 <section class="products">
@@ -11,7 +11,7 @@
           <h3 class="products__card-title">{{ product.title }}</h3>
           <span class="products__card-price">{{ product.price | money }}</span>
           <button class="products__card-button">
-            <img src="{{ 'shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
+            <img src="{{ 'icon-shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
           </button>
         </div>
       </article>
