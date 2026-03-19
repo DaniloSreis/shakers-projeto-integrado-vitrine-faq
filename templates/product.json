@@ -9,27 +9,15 @@
  */
 {
   "sections": {
-    "header_navigation_Pq8rCq": {
+    "header_navigation_zUDhTf": {
       "type": "header-navigation",
       "name": "Header",
       "settings": {
-        "menu_id": "main-menu"
+        "menu_id": ""
       }
-    },
-    "main": {
-      "type": "main-product",
-      "settings": {
-        "product_Id": "sabrina-3-flow"
-      }
-    },
-    "faq": {
-      "type": "product-faq",
-      "settings": {}
     }
   },
   "order": [
-    "header_navigation_Pq8rCq",
-    "main",
-    "faq"
+    "header_navigation_zUDhTf"
   ]
 }
