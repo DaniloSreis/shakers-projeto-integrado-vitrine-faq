@@ -132,5 +132,5 @@ shopify theme dev
 | Tipo | Descrição | Link |
 |:----:|-----------|------|
 | 📁 | Repositório do projeto | [Acessar →](https://github.com/DaniloSreis/shakers-projeto-integrado-vitrine-faq) |
-| 🔗 | Pull Request (entrega) | [Ver PR →](https://github.com/SEU_USUARIO/SEU_REPO/pull/XXX) |
+| 🔗 | Pull Request (entrega) | [Ver PR →](https://github.com/DaniloSreis/shakers-projeto-integrado-vitrine-faq/pull/18) |
 | ▶️ | Vídeo de apresentação (demo) | [Assistir →](https://youtu.be/0GHqqeiVMSM) |
