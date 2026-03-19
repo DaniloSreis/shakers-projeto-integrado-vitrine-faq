@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ 'main-product.css' | asset_url }}">
-<script type="module" src="{{ 'main-product.js' | asset_url}}" defer></script>
+<link rel="stylesheet" href="{{ 'css-main-product.css' | asset_url }}">
+<script type="module" src="{{ 'js-main-product.js' | asset_url}}" defer></script>
 {% assign product_selected = section.settings.product_Id %}
 {% assign sizes = product_selected.variants | map: 'option2' | uniq %}
 {% assign colors = '' %}
@@ -42,16 +42,16 @@
     <div class="product__footer">
       <div aria-label="Quantidade" class="product__quantity">
         <div class="product__quantity-controller" data-action='minus'>
-          <img src="{{ 'minius.svg' | asset_url}} " width="24" height="24" alt="">
+          <img src="{{ 'icon-minius.svg' | asset_url}} " width="24" height="24" alt="">
         </div>
         <span class="product__quantity-value">1</span>
         <div class="product__quantity-controller" data-action='plus'>
-          <img src="{{ 'plus.svg' | asset_url}} " width="24" height="24" alt="">
+          <img src="{{ 'icon-plus.svg' | asset_url}} " width="24" height="24" alt="">
         </div>
       </div>
     </div>
     <button type="button" class="button button--buy">
-      Comprar <img src="{{ 'shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
+      Comprar <img src="{{ 'icon-shopping-bag.svg' | asset_url}}" width="24" height="24" alt="">
     </button>
   </div>
 </section>
