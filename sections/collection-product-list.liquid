@@ -6,7 +6,7 @@
   <div class="products__list">
     {% for product in selected_collection.products %}
       <article class="products__card">
-        <img src="{{ product.featured_image | image_url}}" alt="" class="products__card-image">
+        <img src="{{ product.featured_image | image_url}}" alt="" class="products__card-image" width="auto" height="auto">
         <div class="products__card-footer">
           <h3 class="products__card-title">{{ product.title }}</h3>
           <span class="products__card-price">{{ product.price | money }}</span>
