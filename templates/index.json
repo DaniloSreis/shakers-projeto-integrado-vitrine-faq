@@ -13,11 +13,27 @@
       "type": "header-navigation",
       "name": "Header",
       "settings": {
-        "menu_id": ""
+        "menu_id": "main-menu"
+      }
+    },
+    "hero_slider_AQqdVm": {
+      "type": "hero-slider",
+      "name": "Hero",
+      "settings": {
+        "product_id": "sabrina-3-flow"
+      }
+    },
+    "collection_product_list_AgyFFH": {
+      "type": "collection-product-list",
+      "name": "Lista de Produtos",
+      "settings": {
+        "collection_id": "sabrina-3"
       }
     }
   },
   "order": [
-    "header_navigation_yAUnhD"
+    "header_navigation_yAUnhD",
+    "hero_slider_AQqdVm",
+    "collection_product_list_AgyFFH"
   ]
 }
